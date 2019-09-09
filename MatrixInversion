@@ -1,0 +1,51 @@
+/*
+Input:
+First line consists of a single integer T denoting the number of test cases.
+First line of each test case consists of one integer denoting N. Following N lines consists of N space separated integers denoting the matrix M which is a square matrix N*N.
+
+Output:
+Print the answer to each test case in a new line.
+
+Sample  Input:
+2
+3
+1 2 3
+4 5 6
+7 8 9
+2
+4 3
+1 4
+
+Sample Output:
+0
+2
+*/
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int testCases;
+    cin>>testCases;
+    for(int i=0; i<testCases; i++){
+        int arraySize;
+        cin>>arraySize;
+        int array[arraySize][arraySize];
+        for(int j=0; j<arraySize; j++)
+            for(int k=0; k<arraySize; k++)
+                cin>>array[j][k];           //create an array
+        int inversions=0;
+        for(int j=0; j<arraySize; j++)
+            for(int k=0; k<arraySize; k++){
+                bool flag1=true;    //m start from next element only on the first line
+                for(int l=j; l<arraySize; l++){
+                    for(int m = (flag1 ? (k+1) : k); m<arraySize; m++){
+                        if(array[j][k]>array[l][m])
+                            inversions++;
+                    }
+                    flag1 = false;
+                }
+            }
+        cout<<"\n"<<inversions;
+    }
+}
